@@ -8,6 +8,7 @@ class Magnificos < Sinatra::Base
     set :environment, :development
   end
   
+  
   use Warden::Manager do |config|
     # Tell Warden how to save our User info into a session.
     # Sessions can only take strings, not Ruby code, we'll store
@@ -30,24 +31,26 @@ class Magnificos < Sinatra::Base
     config.failure_app = self
   end
 
+  #
+
   Warden::Manager.before_failure do |env,opts|
     env['REQUEST_METHOD'] = 'POST'
   end
 
   Warden::Strategies.add(:password) do
     def valid?
-      #params["email"] || params["password"]
-      params['user']['username'] && params['user']['password']
+      (params['user']['username'] && params['user']['password']) rescue false
     end
 
     def authenticate!
-      user =  User.first(username: params['user']['username'])
       
+      user =  User.first(username: params['user']['username'])
+      #binding.pry
       if user.nil?
         fail!("Unknown username password combination.")
-        flash.error = ""
+        #flash[:error] = ""
       elsif user.authenticate(params['user']['password'])
-        flash.success = "Successfully Logged In"
+        #flash[:success] = "Successfully Logged In"
         success!(user)
       else
         fail!("Unknown username password combination.(2)")
@@ -73,6 +76,7 @@ class Magnificos < Sinatra::Base
 =end
     
   get '/' do
+    flash[:something] = "Something Else"
     haml :index
   end
   

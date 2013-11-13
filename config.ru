@@ -30,7 +30,7 @@ use Rack::Csrf, :raise => true
 use Rack::Protection
 #use Rack::Protection::EscapedParams
 
-use Rack::Flash, accessorize: [:error, :success]
+use Rack::Flash
 
 
 require 'app'

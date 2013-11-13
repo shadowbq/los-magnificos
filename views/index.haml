@@ -20,12 +20,15 @@
     %link{:href => "images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
     %link{:href => "images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
   %body
-    - if flash.success
+    - if flash[:success]
       .flash{:style => "color:green;"}
-        = flash.success
-    - if flash.error
+        = flash[:success]
+    - if flash[:error]
       .flash{:style => "color:red;"}
-        = flash.error
+        = flash[:error]
+    - if flash[:something]
+      .flash{:style => "color:blue;"}
+        = flash[:something]	
     .topbar
       .fill
         .container
@@ -47,3 +50,9 @@
               %a{:href => "/articles"} ORM Articles
             %li
               %a{:href => "/set-flash"} Flash Notices
+            %li
+              %a{:href => "/auth/login"} Warden DM Login
+            %li
+              %a{:href => "/auth/logout"} Warden DM Logout
+            %li
+              %a{:href => "/protected"} Warden Protected Page

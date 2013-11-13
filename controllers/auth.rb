@@ -2,13 +2,13 @@
 class Magnificos < Sinatra::Base
   
   get '/auth/login' do
-    erb :'auth/login'
+    erb :'auth/login', :layout => :'auth/layout'
   end
 
   post '/auth/login' do
     env['warden'].authenticate!
 
-    flash.success = env['warden'].message
+    flash[:success] = env['warden'].message
 
     if session[:return_to].nil?
       redirect '/'
@@ -20,14 +20,14 @@ class Magnificos < Sinatra::Base
   get '/auth/logout' do
     env['warden'].raw_session.inspect
     env['warden'].logout
-    flash.success = 'Successfully logged out'
+    flash[:success] = 'Successfully logged out'
     redirect '/'
   end
 
   post '/auth/unauthenticated' do
     session[:return_to] = env['warden.options'][:attempted_path]
     puts env['warden.options'][:attempted_path]
-    flash.error = env['warden'].message || "You must log in"
+    flash[:error] = env['warden'].message || "You must log in"
     redirect '/auth/login'
   end
 
