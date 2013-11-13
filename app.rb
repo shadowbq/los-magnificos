@@ -1,4 +1,6 @@
 
+require_relative 'models/init'
+
 class Magnificos < Sinatra::Base
   
   configure do
@@ -6,36 +8,54 @@ class Magnificos < Sinatra::Base
     set :environment, :development
   end
   
-=begin
-  use Warden::Manager do |manager|
-    manager.default_strategies :password
-    manager.failure_app = Magnificos
-    manager.serialize_into_session {|user| user.id}
-    manager.serialize_from_session {|id| Datastore.for(:user).find_by_id(id)}
+  use Warden::Manager do |config|
+    # Tell Warden how to save our User info into a session.
+    # Sessions can only take strings, not Ruby code, we'll store
+    # the User's `id`
+    config.serialize_into_session{|user| user.id }
+    # Now tell Warden how to take what we've stored in the session
+    # and get a User from that information.
+    config.serialize_from_session{|id| User.get(id) }
+
+    config.scope_defaults :default,
+      # "strategies" is an array of named methods with which to
+      # attempt authentication. We have to define this later.
+      strategies: [:password],
+      # The action is a route to send the user to when
+      # warden.authenticate! returns a false answer. We'll show
+      # this route below.
+      action: 'auth/unauthenticated'
+    # When a user tries to log in and cannot, this specifies the
+    # app to send the user to.
+    config.failure_app = self
   end
- 
+
   Warden::Manager.before_failure do |env,opts|
     env['REQUEST_METHOD'] = 'POST'
   end
-  
+
   Warden::Strategies.add(:password) do
     def valid?
-      params["email"] || params["password"]
+      #params["email"] || params["password"]
+      params['user']['username'] && params['user']['password']
     end
 
     def authenticate!
-      user = Datastore.for(:user).find_by_email(params["email"])
-      if user && user.authenticate(params["password"])
+      user =  User.first(username: params['user']['username'])
+      
+      if user.nil?
+        fail!("Unknown username password combination.")
+        flash.error = ""
+      elsif user.authenticate(params['user']['password'])
+        flash.success = "Successfully Logged In"
         success!(user)
       else
-        fail!("Could not log in")
+        fail!("Unknown username password combination.(2)")
       end
+      
     end
   end
-=end  
-  
-
-  
+    
 =begin  
   def warden_handler
     env['warden']
@@ -91,22 +111,9 @@ class Magnificos < Sinatra::Base
   end
 =end  
   
-  get '/csrf_secured' do
-    erb :csrf_secured_form
-  end
-  
-  get '/csrf_unsecured_form_failing_check' do
-    erb :csrf_unsecured_form_failing_check
-  end
-
-  post '/csrf_response' do
-    erb :csrf_response, :locals => {:utterance => params[:utterance],
-      :csrf => params[Rack::Csrf.field]}
-  end
 
   require_relative 'controllers/init'
 
 end
 
 require_relative 'helpers/init'
-require_relative 'models/init'

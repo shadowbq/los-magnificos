@@ -21,6 +21,8 @@ gem 'shellex'   #Safe Shell Execution
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 
+#Flash Notice
+gem 'rack-flash3'
 
 #debugging
 gem 'pry'

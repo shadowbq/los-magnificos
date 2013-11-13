@@ -20,6 +20,12 @@
     %link{:href => "images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
     %link{:href => "images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
   %body
+    - if flash.success
+      .flash{:style => "color:green;"}
+        = flash.success
+    - if flash.error
+      .flash{:style => "color:red;"}
+        = flash.error
     .topbar
       .fill
         .container
@@ -39,3 +45,5 @@
               %a{:href => "/csrf_secured"} CSRF Secured Form
             %li
               %a{:href => "/articles"} ORM Articles
+            %li
+              %a{:href => "/set-flash"} Flash Notices
