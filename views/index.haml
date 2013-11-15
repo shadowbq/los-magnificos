@@ -56,3 +56,9 @@
               %a{:href => "/auth/logout"} Warden DM Logout
             %li
               %a{:href => "/protected"} Warden Protected Page
+    /
+      Le javascript
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    %script{:src => "/js/jquery-1.10.2.min.js"}
+    %script{:src => "/js/bootstrap.js"}
