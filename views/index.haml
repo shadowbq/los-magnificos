@@ -5,6 +5,7 @@
     %title Magnificos - Bootstrap, from Twitter
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "author"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     / Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,6 +21,25 @@
     %link{:href => "images/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
     %link{:href => "images/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
   %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container-fluid
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.brand{:href => "#"} Project name
+          .nav-collapse
+            %ul.nav
+              %li.active
+                %a{:href => "#"} Home
+              %li
+                %a{:href => "#about"} About
+              %li
+                %a{:href => "#contact"} Contact
+            %p.navbar-text.pull-right
+              Logged in as
+              %a{:href => "#"} username
     - if flash[:success]
       .flash{:style => "color:green;"}
         = flash[:success]
@@ -29,33 +49,36 @@
     - if flash[:something]
       .flash{:style => "color:blue;"}
         = flash[:something]	
-    .topbar
-      .fill
-        .container
-          %a.brand{:href => "#"} Twitter Bootstrap 2.0 Examples in Haml
-          %ul.nav
-            %li.active
-              %a{:href => "/"} Home
-            %li
-              %a{:href => "/fluid"} Fluid
-            %li
-              %a{:href => "/hero"} Hero
-            %li
-              %a{:href => "/container-app"} Container App
-            %li
-              %a{:href => "/starter-template"} Starter Template
-            %li
-              %a{:href => "/csrf_secured"} CSRF Secured Form
-            %li
-              %a{:href => "/articles"} ORM Articles
-            %li
-              %a{:href => "/set-flash"} Flash Notices
-            %li
-              %a{:href => "/auth/login"} Warden DM Login
-            %li
-              %a{:href => "/auth/logout"} Warden DM Logout
-            %li
-              %a{:href => "/protected"} Warden Protected Page
+        .container-fluid
+          .row-fluid
+            .span12
+              .hero-unit
+                %h1 Los Magnificos
+                %p This is a sinatra bootstap secure starter template.. 
+              .row-fuild
+                %ul.nav
+                  %li.active
+                    %a{:href => "/"} Home
+                  %li
+                    %a{:href => "/fluid"} Fluid
+                  %li
+                    %a{:href => "/hero"} Hero
+                  %li
+                    %a{:href => "/container-app"} Container App
+                  %li
+                    %a{:href => "/starter-template"} Starter Template
+                  %li
+                    %a{:href => "/csrf_secured"} CSRF Secured Form
+                  %li
+                    %a{:href => "/articles"} ORM Articles
+                  %li
+                    %a{:href => "/set-flash"} Flash Notices
+                  %li
+                    %a{:href => "/auth/login"} Warden DM Login
+                  %li
+                    %a{:href => "/auth/logout"} Warden DM Logout
+                  %li
+                    %a{:href => "/protected"} Warden Protected Page
     /
       Le javascript
       \==================================================
