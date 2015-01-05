@@ -9,6 +9,9 @@ class User
   property :password, BCryptHash
 
   def authenticate(attempted_password)
+    #puts "attempted_password:#{attempted_password}"
+    #puts "self.password:#{self.password}"
+
     if self.password == attempted_password
       true
     else

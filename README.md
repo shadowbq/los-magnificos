@@ -32,6 +32,7 @@ CSRF_RACK protection
 Rack-based authentication
 
 ```ruby
+	@user.username = "admin"
     @user.password = "password"
     @user.email = "admin@domain.org"
 ```
