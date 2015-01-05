@@ -37,9 +37,15 @@
                 %a{:href => "#about"} About
               %li
                 %a{:href => "#contact"} Contact
-            %p.navbar-text.pull-right
-              Logged in as
-              %a{:href => "#"} username
+            -if env['warden'].authenticated?
+              %p.navbar-text.pull-right
+                Logged in as
+                %a{:href => "#"}= env['warden'].user.username
+                |
+                %a{:href => "/auth/logout"} Logout
+            -else
+              %p.navbar-text.pull-right
+                %a{:href => "/auth/login"} Login
     .container-fluid
       .row-fluid
       - if flash[:success]
@@ -77,10 +83,6 @@
                 %a{:href => "/articles"} ORM Articles
               %li
                 %a{:href => "/set-flash"} Flash Notices
-              %li
-                %a{:href => "/auth/login"} Warden DM Login
-              %li
-                %a{:href => "/auth/logout"} Warden DM Logout
               %li
                 %a{:href => "/protected"} Warden Protected Page
     /
