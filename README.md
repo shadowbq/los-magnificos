@@ -1,11 +1,14 @@
+<p align="center">
+<img src="https://raw.githubusercontent.com/shadowbq/los-magnificos/master/public/img/plan_b.png">
+</p>
+
 los-magnificos
 ==============
+Sinatra Template => A-TEAM a.k.a  ***More Dakka***, DM Enabled, Users, Twitter Bootstrap, and Chrome plated Ruger Mini-14's.. 
 
-Sinatra Template - Secure. DM, Users, Twitter Bootstrap
+This is a semi-useful example app that is fairly laughable. A very simple [Sinatra](http://www.sinatrarb.com/) application where the example pages from the [Twitter Bootstrap](http://twitter.github.com/bootstrap/) framework have been converted to [Haml](http://haml-lang.com/).
 
-A very simple [Sinatra](http://www.sinatrarb.com/) application where the example pages from the [Twitter Bootstrap](http://twitter.github.com/bootstrap/) framework have been converted to [Haml](http://haml-lang.com/).
-
-This original example templates used were current as of Bootstrap v2.0.0.
+Note: This original example templates used were current as of Bootstrap v2.0.0.
 
 ## Installation
 
