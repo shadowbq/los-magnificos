@@ -18,13 +18,21 @@ bundle install
 
 ## Running 
 
-`rackup`
+Start the Rack server via 
+
+`rackup config.ru`
 
 You should now be able to view the application at [localhost:9292](http://localhost:9292).
+
+You can use any RACK enabled server (webbrick, puma (Mongrel), unicorn, apache/mod-rails, nginx/phusionpassenger)
+
+## Running in Developement Mode
 
 `shotgun config.ru`
 
 You can also run it with shotgun at [localhost:9393](http://localhost:9393).
+
+*Note: shotgun reloads ruby libraries and runs `PRAGMA table_info` against the RDMS on EVERY page request. This will serverly impact speed of the system.*
 
 ## CSRF Security
 
