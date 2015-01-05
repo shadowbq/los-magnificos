@@ -8,8 +8,8 @@ gem 'haml', '3.1.4'
 gem 'shotgun'
 
 #Authentication
-gem 'warden' #*I'm using version 1.2.1*
-gem 'bcrypt-ruby' #*I'm using 3.0.1*
+gem 'warden'
+gem 'bcrypt-ruby', :require => "bcrypt"
 
 #Security
 gem 'rack-protection'
